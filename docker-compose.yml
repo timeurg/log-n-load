@@ -1,0 +1,12 @@
+name: 'log-n-load'
+
+services:
+  backend:
+    image: backend
+    build:
+      context: backend
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000

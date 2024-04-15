@@ -1,0 +1,17 @@
+name: 'log-n-load-dev'
+
+services:
+  backend:
+    image: backend
+    build:
+      context: backend
+      dockerfile: ./Dockerfile
+      target: development      
+    volumes:
+      - ./backend:/home/node/backend
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
+      - 9229:9229
+    command: ["npm", "run", "start:debug"]

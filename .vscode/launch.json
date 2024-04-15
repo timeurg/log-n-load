@@ -1,0 +1,42 @@
+{
+    "configurations": [
+        {
+            "name": "backend: docker debug mode",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node",
+            "dockerServerReadyAction": {
+                "pattern": "Listening on port (\\d+)"
+            },
+            "node": {
+                "package": "${workspaceFolder}/backend/package.json",
+                "autoAttachChildProcesses": true,
+                "localRoot": "${workspaceFolder}/backend",
+                "remoteRoot": "/home/node",
+                "stopOnEntry": true
+            }
+        },
+        {
+            "name": "Attach to 127.0.0.1:9229",
+            "address": "127.0.0.1",
+            "port": 9229,
+            "localRoot": "${workspaceFolder}/backend",
+            "remoteRoot": "/home/node/backend",
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "name": "Attach by Process ID",
+            "processId": "${command:PickProcess}",
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        }
+    ]
+}

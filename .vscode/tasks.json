@@ -1,0 +1,66 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "node",
+			"dockerBuild": {
+				"dockerfile": "${workspaceFolder}/backend/Dockerfile",
+				"context": "${workspaceFolder}/backend",
+				"pull": true
+			},
+			"node": {
+				"package": "${workspaceFolder}/backend/package.json"
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: release",
+			"dependsOn": [
+				"docker-build"
+			],
+			"platform": "node",
+			"node": {
+				"package": "${workspaceFolder}/backend/package.json"
+			}
+		},
+		{
+			"type": "docker-build",
+			"label": "docker-build-dev",
+			"platform": "node",
+			"dockerBuild": {
+				"dockerfile": "${workspaceFolder}/backend/Dockerfile",
+				"context": "${workspaceFolder}/backend",
+				"target": "development",
+				"pull": true
+			},
+			"node": {
+				"package": "${workspaceFolder}/backend/package.json"
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build-dev"
+			],
+			"dockerRun": {
+				"env": {
+					"DEBUG": "*",
+					"NODE_ENV": "development"
+				},
+				"command": "npm run start:debug",
+				"ports": [{"containerPort": 3000, "hostPort": 3000}, {"containerPort": 9229, "hostPort": 9229}],
+				"volumes": [{
+					"containerPath": "/home/node/backend",
+					"localPath": "./backend"
+				}]
+			},
+			"node": {
+				"package": "${workspaceFolder}/backend/package.json",
+				"enableDebugging": true
+			}
+		}
+	]
+}

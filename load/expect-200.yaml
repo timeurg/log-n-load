@@ -1,0 +1,18 @@
+config:
+  target: "{{ $env.LOAD_TARGET }}"
+  phases:
+    - duration: "{{ $env.LOAD_DURATION }}"
+      arrivalRate: "{{ $env.LOAD_ARRIVAL_RATE }}"
+  plugins:
+    expect: {}
+    ensure:
+      thresholds:
+        - "http.response_time.p99": 250
+        - "http.response_time.p95": 100
+scenarios:
+  - name: "{{ $env.LOAD_URL }} returns 200"
+    flow:
+      - get:
+          url: "{{ $env.LOAD_URL }}"
+          expect:
+            - statusCode: 200

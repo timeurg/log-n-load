@@ -50,7 +50,7 @@
 					"DEBUG": "*",
 					"NODE_ENV": "development"
 				},
-				"command": "npm run start:debug",
+				"command": "node /home/node/backend/node_modules/.bin/nest start --debug 0.0.0.0:9229 --watch",
 				"ports": [{"containerPort": 3000, "hostPort": 3000}, {"containerPort": 9229, "hostPort": 9229}],
 				"volumes": [{
 					"containerPath": "/home/node/backend",

@@ -14,4 +14,4 @@ services:
     ports:
       - 3000:3000
       - 9229:9229
-    command: ["npm", "run", "start:debug"]
+    command: ["node", "/home/node/backend/node_modules/.bin/nest", "start", "--debug 0.0.0.0:9229", "--watch"]

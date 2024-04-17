@@ -6,12 +6,12 @@
 			"label": "docker-build",
 			"platform": "node",
 			"dockerBuild": {
-				"dockerfile": "${workspaceFolder}/backend/Dockerfile",
-				"context": "${workspaceFolder}/backend",
+				"dockerfile": "${workspaceFolder}/api/Dockerfile",
+				"context": "${workspaceFolder}/api",
 				"pull": true
 			},
 			"node": {
-				"package": "${workspaceFolder}/backend/package.json"
+				"package": "${workspaceFolder}/api/package.json"
 			}
 		},
 		{
@@ -22,7 +22,7 @@
 			],
 			"platform": "node",
 			"node": {
-				"package": "${workspaceFolder}/backend/package.json"
+				"package": "${workspaceFolder}/api/package.json"
 			}
 		},
 		{
@@ -30,13 +30,13 @@
 			"label": "docker-build-dev",
 			"platform": "node",
 			"dockerBuild": {
-				"dockerfile": "${workspaceFolder}/backend/Dockerfile",
-				"context": "${workspaceFolder}/backend",
+				"dockerfile": "${workspaceFolder}/api/Dockerfile",
+				"context": "${workspaceFolder}/api",
 				"target": "development",
 				"pull": true
 			},
 			"node": {
-				"package": "${workspaceFolder}/backend/package.json"
+				"package": "${workspaceFolder}/api/package.json"
 			}
 		},
 		{
@@ -50,15 +50,15 @@
 					"DEBUG": "*",
 					"NODE_ENV": "development"
 				},
-				"command": "node /home/node/backend/node_modules/.bin/nest start --debug 0.0.0.0:9229 --watch",
+				"command": "node /home/node/api/node_modules/.bin/nest start --debug 0.0.0.0:9229 --watch",
 				"ports": [{"containerPort": 3000, "hostPort": 3000}, {"containerPort": 9229, "hostPort": 9229}],
 				"volumes": [{
-					"containerPath": "/home/node/backend",
-					"localPath": "./backend"
+					"containerPath": "/home/node/api",
+					"localPath": "./api"
 				}]
 			},
 			"node": {
-				"package": "${workspaceFolder}/backend/package.json",
+				"package": "${workspaceFolder}/api/package.json",
 				"enableDebugging": true
 			}
 		}

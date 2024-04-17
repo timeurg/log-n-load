@@ -1,0 +1,5 @@
+{
+    "vsicons.associations.folders": [
+        { "icon": "controller", "extensions": ["load"], "format": "svg", "light": true }
+    ]
+}

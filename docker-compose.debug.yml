@@ -1,20 +1,20 @@
 name: 'log-n-load-dev'
 
 services:
-  backend:
-    image: backend
+  api:
+    image: api
     build:
-      context: backend
+      context: api
       dockerfile: ./Dockerfile
       target: development      
     volumes:
-      - ./backend:/home/node/backend
+      - ./api:/home/node/api
     environment:
       NODE_ENV: development
     ports:
       - 3000:3000
       - 9229:9229
-    command: ["node", "/home/node/backend/node_modules/.bin/nest", "start", "--debug 0.0.0.0:9229", "--watch"]
+    command: ["node", "/home/node/api/node_modules/.bin/nest", "start", "--debug 0.0.0.0:9229", "--watch"]
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:3000 || exit 1
       interval: 5s
@@ -28,10 +28,10 @@ services:
       dockerfile: ./Dockerfile
       target: base      
       args:
-        LOAD_TARGET: ${LOAD_TARGET:-http://backend:3000}
+        LOAD_TARGET: ${LOAD_TARGET:-http://api:3000}
         LOAD_ARRIVAL_RATE: ${LOAD_ARRIVAL_RATE:-10}
         LOAD_DURATION: ${LOAD_DURATION:-30}
     depends_on:
-      backend:
+      api:
         condition: service_healthy
     command: ["run", "expect-200.yaml"]

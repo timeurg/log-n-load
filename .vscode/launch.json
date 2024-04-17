@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "backend: docker debug mode",
+            "name": "api: docker debug mode",
             "type": "docker",
             "request": "launch",
             "preLaunchTask": "docker-run: debug",
@@ -10,9 +10,9 @@
                 "pattern": "Listening on port (\\d+)"
             },
             "node": {
-                "package": "${workspaceFolder}/backend/package.json",
+                "package": "${workspaceFolder}/api/package.json",
                 "autoAttachChildProcesses": true,
-                "localRoot": "${workspaceFolder}/backend",
+                "localRoot": "${workspaceFolder}/api",
                 "remoteRoot": "/home/node",
                 "stopOnEntry": true
             }
@@ -21,8 +21,8 @@
             "name": "Attach to 127.0.0.1:9229",
             "address": "127.0.0.1",
             "port": 9229,
-            "localRoot": "${workspaceFolder}/backend",
-            "remoteRoot": "/home/node/backend",
+            "localRoot": "${workspaceFolder}/api",
+            "remoteRoot": "/home/node/api",
             "request": "attach",
             "skipFiles": [
                 "<node_internals>/**"
